@@ -10412,17 +10412,17 @@ button.btn-close.qty_close {
   letter-spacing: 0;
   line-height: 1;
 }
-.mn-login-wrapper .mn-login-container .mn-login-form input {
-  height: 50px;
-  margin-bottom: 24px;
-  padding: 0 15px;
-  background-color: transparent;
-  border: 1px solid #e5e5e5;
-  border-radius: 15px;
-  color: #f1f4f7;
-  font-size: 14px;
-  outline: none;
-}
+    .mn-login-wrapper .mn-login-container .mn-login-form input {
+        height: 50px;
+        margin-bottom: 24px;
+        padding: 0 15px;
+        background-color: transparent;
+        border: 1px solid #e5e5e5;
+        border-radius: 15px;
+        color: #313b50;
+        font-size: 14px;
+        outline: none;
+    }
 .mn-login-wrapper .mn-login-container .mn-login-form .mn-login-wrap + .mn-login-wrap input {
   margin-bottom: 15px;
 }
