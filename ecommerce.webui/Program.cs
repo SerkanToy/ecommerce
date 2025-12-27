@@ -3,6 +3,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddAuthentication().AddCookie("MyCookie", opt =>
+{
+    opt.Cookie.Name = "MyCookie";
+    opt.LoginPath = "/Login/Login";
+    opt.LogoutPath = "/Login/Logout";
+    opt.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -18,6 +26,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapStaticAssets();
 app.MapRazorPages()
