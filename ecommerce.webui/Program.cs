@@ -3,11 +3,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddAuthentication().AddCookie("MyCookie", opt =>
+builder.Services.AddAuthentication("MyCookie").AddCookie("MyCookie", opt =>
 {
     opt.Cookie.Name = "MyCookie";
-    opt.LoginPath = "/Login/Login";
-    opt.LogoutPath = "/Login/Logout";
+    opt.LoginPath = "/login";
+    opt.LogoutPath = "/logout";
+    opt.AccessDeniedPath = "/access-denied";
     opt.ExpireTimeSpan = TimeSpan.FromMinutes(30);
 });
 
@@ -25,8 +26,8 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapStaticAssets();
 app.MapRazorPages()

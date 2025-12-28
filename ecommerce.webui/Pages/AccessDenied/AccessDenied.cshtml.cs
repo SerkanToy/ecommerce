@@ -1,11 +1,9 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ecommerce.webui.Pages.Cart
+namespace ecommerce.webui.Pages.AccessDenied
 {
-    [Authorize]
-    public class CartModel : PageModel
+    public class AccessDeniedModel : PageModel
     {
         public void OnGet()
         {
