@@ -28,7 +28,8 @@ namespace ecommerce.dashboards.Pages.Login
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, loginDto.UserName)
+                    new Claim(ClaimTypes.Name, loginDto.UserName),
+                    new Claim("Invoice", "true")
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

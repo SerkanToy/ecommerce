@@ -14,8 +14,22 @@ builder.Services.AddAuthentication(_ =>
     opt.Cookie.Name = "CookieAuth";
     opt.LoginPath = "/login";
     opt.LogoutPath = "/Login/Logout";
+    opt.AccessDeniedPath = "/access-denied";
 });
 
+
+builder.Services.AddAuthorization(_ =>
+{
+    _.AddPolicy("Invoice", policy =>
+    {
+        policy.RequireClaim("Invoice");
+    });
+    _.AddPolicy("UserName", policy =>
+    {
+        policy.RequireUserName("admin@admin.com");
+        policy.RequireUserName("stoy@admin.com");
+    });
+});
 
 var app = builder.Build();
 
