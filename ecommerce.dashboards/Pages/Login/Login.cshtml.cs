@@ -1,6 +1,7 @@
 using ecommerce.dashboards.Model.DTOs.Account;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
@@ -29,6 +30,8 @@ namespace ecommerce.dashboards.Pages.Login
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, loginDto.UserName),
+                    new Claim(ClaimTypes.Email, loginDto.UserName),
+                    new Claim("FullName", "Admin ADMIN"),
                     new Claim("Invoice", "true")
                 };
 
@@ -40,6 +43,13 @@ namespace ecommerce.dashboards.Pages.Login
                 return RedirectToPage("/Index");
             }
             return Page();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> OnGetLogOut()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("/Login");
         }
     }
 }

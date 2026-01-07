@@ -13,7 +13,7 @@ builder.Services.AddAuthentication(_ =>
 {
     opt.Cookie.Name = "CookieAuth";
     opt.LoginPath = "/login";
-    opt.LogoutPath = "/Login/Logout";
+    opt.LogoutPath = "/login";
     opt.AccessDeniedPath = "/access-denied";
 });
 
