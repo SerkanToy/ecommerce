@@ -15,6 +15,7 @@ builder.Services.AddAuthentication(_ =>
     opt.LoginPath = "/login";
     opt.LogoutPath = "/login";
     opt.AccessDeniedPath = "/access-denied";
+    opt.ExpireTimeSpan = TimeSpan.FromSeconds(20);
 });
 
 
