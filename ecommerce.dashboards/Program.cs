@@ -32,9 +32,9 @@ builder.Services.AddAuthorization(_ =>
     });
 });
 
-builder.Services.AddHttpClient("EcommerceApi", client =>
+builder.Services.AddHttpClient("admin.ecommerce.api", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:7075");
+    client.BaseAddress = new Uri("https://localhost:7075");
     client.Timeout = TimeSpan.FromSeconds(30);
     client.DefaultRequestHeaders.Clear();
     client.DefaultRequestHeaders.Add("Accept", "application/json");
