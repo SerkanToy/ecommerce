@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ecommerce.dashboards.Pages.Invoices
+namespace ecommerce.dashboards.Pages.Blog
 {
-
-    public class InvoicesModel : PageModel
+    public class AddBlogModel : PageModel
     {
         public void OnGet()
         {

@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ecommerce.dashboards.Pages.Invoices
+namespace ecommerce.dashboards.Pages.Blog
 {
-
-    public class InvoicesModel : PageModel
+    [Authorize]
+    public class BlogModel : PageModel
     {
         public void OnGet()
         {
