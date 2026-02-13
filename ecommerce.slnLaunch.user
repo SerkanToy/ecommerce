@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "ecommerce",
+    "Projects": [
+      {
+        "Path": "ecommerce.api\\ecommerce.api.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]
