@@ -22,5 +22,6 @@
         public ICollection<ProductsTags> ProductsTags { get; set; }
         public ICollection<CategoriesProducts> CategoriesProducts { get; set; }
         public ICollection<Galleries> Galleries { get; set; }
+        public ICollection<ProductsCoupons> ProductsCoupons { get; set; }
     }
 }

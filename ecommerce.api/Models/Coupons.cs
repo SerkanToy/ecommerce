@@ -22,5 +22,6 @@
         public string? UpdateDate { get; set; }
         public string? DeleteBy { get; set; }
         public string? DeleteDate { get; set; }
+        public ICollection<ProductsCoupons> ProductsCoupons { get; set; }
     }
 }
