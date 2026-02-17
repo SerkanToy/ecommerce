@@ -26,7 +26,9 @@ namespace ecommerce.api.Controllers
                     new Claim(ClaimTypes.Name, loginDto.UserName),
                     new Claim(ClaimTypes.Email, loginDto.UserName),
                     new Claim("FullName", "Admin ADMIN"),
-                    new Claim("Invoice", "true")
+                    new Claim("invoice", "true"),
+                    new Claim("admin", "true"),
+                    new Claim("user", "true")
                 };
 
                 var expiration = DateTime.UtcNow.AddMinutes(1);

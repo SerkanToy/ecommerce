@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
-using System.Security.Principal;
-using System.Threading.Tasks;
 
 namespace ecommerce.webui.Pages.Login
 {
@@ -25,11 +23,11 @@ namespace ecommerce.webui.Pages.Login
             }
             // Authentication logic would go here
 
-            if(loginDto.UserName == "xxx@xxx.com" && loginDto.Password == "xxxxxx")
+            if(loginDto.UserName == "admin@admin.com" && loginDto.Password == "admin")
             {
                 var claims = new List<Claim> { 
-                    new Claim(ClaimTypes.Email, "xxx@xxx.com"),
-                    new Claim(ClaimTypes.Name, "Xxxx")
+                    new Claim(ClaimTypes.Email, "admin@admin.com"),
+                    new Claim(ClaimTypes.Name, "Admin")
                 };
 
                 var identity = new ClaimsIdentity(claims, "MyCookie");
