@@ -1,3 +1,4 @@
+using ecommerce.dashboards.Model.Authorization;
 using ecommerce.dashboards.Model.DTOs.Account;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace ecommerce.dashboards.Pages.Login
 {
@@ -12,6 +14,12 @@ namespace ecommerce.dashboards.Pages.Login
     {
         [BindProperty]
         public LoginDto LoginDto { get; set; }
+        private IHttpClientFactory _httpClientFactory;
+
+        public LoginModel(IHttpClientFactory _httpClientFactory)
+        {
+            this._httpClientFactory = _httpClientFactory;
+        }
 
         public void OnGet()
         {
@@ -25,7 +33,23 @@ namespace ecommerce.dashboards.Pages.Login
                 return Page();
             }
 
-            if(loginDto.UserName == "admin@admin.com" && loginDto.Password == "admin")
+
+            var client = _httpClientFactory.CreateClient("admin.ecommerce.api");
+            var result = await client.PostAsJsonAsync("Auth/login", new LoginDto { 
+                UserName = loginDto.UserName,
+                Password = loginDto.Password
+            });
+            result.EnsureSuccessStatusCode();
+            var stringResult = await result.Content.ReadAsStringAsync();
+
+            var token = JsonSerializer.Deserialize<JwtToken>(stringResult, 
+                new JsonSerializerOptions { 
+                    PropertyNameCaseInsensitive = true 
+            });
+
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token?.AccessToken??string.Empty);
+
+            if (loginDto.UserName == "admin@admin.com" && loginDto.Password == "admin")
             {
                 var claims = new List<Claim>
                 {

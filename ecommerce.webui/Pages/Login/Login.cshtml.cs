@@ -21,9 +21,9 @@ namespace ecommerce.webui.Pages.Login
             {
                 return Page();
             }
-            // Authentication logic would go here
 
-            if(loginDto.UserName == "admin@admin.com" && loginDto.Password == "admin")
+
+            if (loginDto.UserName == "admin@admin.com" && loginDto.Password == "admin")
             {
                 var claims = new List<Claim> { 
                     new Claim(ClaimTypes.Email, "admin@admin.com"),

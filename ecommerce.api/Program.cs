@@ -13,8 +13,7 @@ builder.Services.AddAuthentication(opt =>
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-    .AddJwtBearer(options =>
+}).AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
@@ -32,9 +31,7 @@ builder.Services.AddAuthentication(opt =>
     });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddDbContext<EcommerceDatabase>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
-
-
+builder.Services.AddDbContext<EcommerceDatabase>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStrings:DefaultConnection")));
 
 builder.Services.AddOpenApi();
 
@@ -46,6 +43,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true).AllowCredentials());
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
