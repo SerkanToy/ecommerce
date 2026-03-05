@@ -26,28 +26,33 @@ namespace ecommerce.dashboards.Pages.Login
             LoginDto = new LoginDto();
         }
 
-        public async Task<IActionResult> OnPostLoginIn(LoginDto loginDto) 
-        { 
-            if(!ModelState.IsValid)
+        public async Task<IActionResult> OnPostLoginIn(LoginDto loginDto)
+        {
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-
+            JwtToken token = new JwtToken();
+            var strTokenObj = HttpContext.Session.GetString("access_token");
             var client = _httpClientFactory.CreateClient("admin.ecommerce.api");
-            var result = await client.PostAsJsonAsync("Auth/login", new LoginDto { 
-                UserName = loginDto.UserName,
-                Password = loginDto.Password
-            });
-            result.EnsureSuccessStatusCode();
-            var stringResult = await result.Content.ReadAsStringAsync();
+            if (String.IsNullOrEmpty(strTokenObj))
+            {
+                token = await GetTokenFromSessionOrApi(loginDto:loginDto, client: client);
+            }
+            else
+            {
+                token = JsonSerializer.Deserialize<JwtToken>(strTokenObj,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }) ?? new JwtToken();
+            }
 
-            var token = JsonSerializer.Deserialize<JwtToken>(stringResult, 
-                new JsonSerializerOptions { 
-                    PropertyNameCaseInsensitive = true 
-            });
+            if (token == null || String.IsNullOrEmpty(token.AccessToken) || token.ExpireAt <= DateTime.UtcNow)
 
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token?.AccessToken??string.Empty);
+
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token?.AccessToken ?? string.Empty);
 
             if (loginDto.UserName == "admin@admin.com" && loginDto.Password == "admin")
             {
@@ -77,5 +82,25 @@ namespace ecommerce.dashboards.Pages.Login
             await HttpContext.SignOutAsync();
             return RedirectToAction("/Login");
         }
+
+
+        private async Task<JwtToken> GetTokenFromSessionOrApi(LoginDto loginDto, HttpClient client)
+        {
+
+            var result = await client.PostAsJsonAsync("Auth/login", new LoginDto
+            {
+                UserName = loginDto.UserName,
+                Password = loginDto.Password
+            });
+            result.EnsureSuccessStatusCode();
+            var stringResult = await result.Content.ReadAsStringAsync();
+            HttpContext.Session.SetString("access_token", stringResult);
+            return JsonSerializer.Deserialize<JwtToken>(stringResult,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                }) ?? new JwtToken();
+        }
+           
     }
 }
