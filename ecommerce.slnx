@@ -1,5 +1,8 @@
 <Solution>
   <Project Path="ecommerce.api/ecommerce.api.csproj" />
+  <Project Path="ecommerce.Application/ecommerce.Application.csproj" Id="0d83fed2-e501-4c48-bbc2-d255ac21472e" />
   <Project Path="ecommerce.dashboards/ecommerce.dashboards.csproj" Id="e9c62de5-ab52-4f62-b93d-a024e83ebd4b" />
+  <Project Path="ecommerce.Domain/ecommerce.Domain.csproj" Id="fe0a3f6c-2bd2-4b89-9422-f2c031ff2b78" />
+  <Project Path="ecommerce.Infrastructure/ecommerce.Infrastructure.csproj" Id="1c52830c-9f2f-4c27-841c-eb8c53149bde" />
   <Project Path="ecommerce.webui/ecommerce.webui.csproj" />
 </Solution>

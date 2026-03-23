@@ -1,6 +1,5 @@
-using ecommerce.api.Domain.Context;
+using ecommerce.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +30,7 @@ builder.Services.AddAuthentication(opt =>
     });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddDbContext<EcommerceDatabase>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStrings:DefaultConnection")));
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddOpenApi();
 
