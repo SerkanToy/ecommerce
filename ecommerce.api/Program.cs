@@ -7,27 +7,27 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 //Bearer token authentication
-builder.Services.AddAuthentication(opt =>
-{
-    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-        {
-            ValidateAudience = true,
-            ValidateIssuer = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = "https://localhost:44371",
-            ValidAudience = "ecommerce.api",            
-            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["SecurityKey"]!)),
-            ClockSkew = TimeSpan.Zero
-        };
-        options.Authority = "https://localhost:44371";
-        options.Audience = "ecommerce.api";
-    });
+//builder.Services.AddAuthentication(opt =>
+//{
+//    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//    opt.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(options =>
+//    {
+//        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+//        {
+//            ValidateAudience = true,
+//            ValidateIssuer = true,
+//            ValidateLifetime = true,
+//            ValidateIssuerSigningKey = true,
+//            ValidIssuer = "https://localhost:44371",
+//            ValidAudience = "ecommerce.api",            
+//            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["SecurityKey"]!)),
+//            ClockSkew = TimeSpan.Zero
+//        };
+//        options.Authority = "https://localhost:44371";
+//        options.Audience = "ecommerce.api";
+//    });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddInfrastructure(builder.Configuration);
