@@ -1,4 +1,5 @@
 ﻿using ecommerce.api.Domain.Context;
+using ecommerce.Application.Services;
 using ecommerce.Domain.Entities.Users;
 using ecommerce.Infrastructure.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -6,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace ecommerce.Infrastructure
 {
@@ -55,6 +55,8 @@ namespace ecommerce.Infrastructure
             });
 
             service.AddAuthorization();
+
+            service.AddScoped<IJwtProvider, JwtProvider>();
 
             return service;
         }
