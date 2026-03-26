@@ -7,7 +7,7 @@ namespace ecommerce.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection service)
         {
-            service.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
+            //service.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
             return service;
         }
     }

@@ -12,6 +12,8 @@ namespace ecommerce.Domain.Entities.Users
         public string Name { get; set; }
         public string SurName { get; set; }
         public string? TCNo { get; set; }
+        public string RefreshToken { get; set; }
+        public string RefreshTokenExpireDate { get; set; }
         [NotMapped]
         public ICollection<UserRoleApp>? UserRoles { get; set; }
         public ICollection<UserAddress>? UserAddress { get; set; }
